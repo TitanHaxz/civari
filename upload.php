@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Görsel Yükleme (WebP'ye çevirir + boyutlandırır)
+ * CİVARİ — Görsel Yükleme (WebP'ye çevirir + boyutlandırır)
  * POST file=<resim>, type=avatar|review  (GİRİŞ GEREKLİ)
  * GD varsa: yeniden boyutlandırıp WebP olarak kaydeder (küçük dosya).
  * GD/WebP yoksa: orijinali kaydeder (yedek).

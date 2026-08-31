@@ -1,5 +1,5 @@
 /* =====================================================
-   NEARBY — İstemci Mantığı (v3)
+   CİVARİ — İstemci Mantığı (v3)
    ===================================================== */
 /* API'ye ulaşılamazsa gösterilen yedek liste — 5 GERÇEK Ankara vitrin mekanı
    (veritabanındaki kayıtların birebir kopyası; uydurma mekan dönemi kapandı). */
@@ -173,8 +173,8 @@ let reviewPhotoFile = null;
 
 /* ===== KEŞİF (sis kalkması) ===== */
 let discovered = new Set();
-try { const s = JSON.parse(localStorage.getItem('nearby_discovered') || '[]'); discovered = new Set(s.map(Number)); } catch(e){}
-function saveDiscovered(){ try { localStorage.setItem('nearby_discovered', JSON.stringify([...discovered])); } catch(e){} }
+try { const s = JSON.parse(localStorage.getItem('civari_discovered') || '[]'); discovered = new Set(s.map(Number)); } catch(e){}
+function saveDiscovered(){ try { localStorage.setItem('civari_discovered', JSON.stringify([...discovered])); } catch(e){} }
 function markDiscovered(id){
     id = Number(id);
     if (discovered.has(id)) return false;
@@ -403,7 +403,7 @@ async function openDetail(id){
 }
 
 async function shareVenue(v){
-    const text=`${v.name} — Nearby'de keşfet!`;
+    const text=`${v.name} — Civari'de keşfet!`;
     /* Mekanın kendi sayfası paylaşılır (ana sayfa değil) — link açan kişi doğrudan mekanı görür */
     const url=location.origin+location.pathname.replace(/[^/]*$/,'')+'mekan.php?id='+encodeURIComponent(v.id);
     if(navigator.share){ try{ await navigator.share({title:v.name,text,url}); }catch(e){} }
@@ -590,7 +590,7 @@ function renderProfile(){
         <button class="btn-primary" onclick="saveContact()">Bilgileri Kaydet</button>`;
 
     document.getElementById('pane-cuzdan').innerHTML=`
-        <div class="wallet-card"><div class="w-label">Nearby Puan Bakiyen</div><div class="w-amount">${p.points} <span style="font-size:1rem;">puan</span></div></div>
+        <div class="wallet-card"><div class="w-label">Civari Puan Bakiyen</div><div class="w-amount">${p.points} <span style="font-size:1rem;">puan</span></div></div>
         <p class="wallet-note">Her yorumun için <strong>10 puan</strong> kazanırsın. Puanların seviyeni yükseltir ve ileride mekanlarda indirim/kampanyalarda kullanılabilecek.</p>`;
 
     const fav=p.favorites||[];
@@ -656,7 +656,7 @@ function initMap(){
             iconCreateFunction:function(cluster){
                 const n=cluster.getChildCount();
                 const size = n<10?38:(n<100?48:60);
-                return L.divIcon({html:`<div class="nearby-cluster" style="width:${size}px;height:${size}px">${n}</div>`,className:'',iconSize:[size,size]});
+                return L.divIcon({html:`<div class="civari-cluster" style="width:${size}px;height:${size}px">${n}</div>`,className:'',iconSize:[size,size]});
             }
           })
         : L.featureGroup();
@@ -664,8 +664,8 @@ function initMap(){
     if(userPos){ userMarker=L.circleMarker([userPos.lat,userPos.lng],{radius:9,color:'#fff',fillColor:'#ff9900',fillOpacity:1,weight:3}).addTo(map).bindTooltip('Buradasın'); }
     updateMapMarkers();
     // "Bu alanda ara" — kullanıcı haritayı gezdirince beliren yüzen buton
-    map.on('movestart', ()=>{ if(mapReady) window._nearbyUserMoved=true; });
-    map.on('moveend', ()=>{ if(mapReady && window._nearbyUserMoved){ const b=document.getElementById('areaSearchBtn'); if(b) b.classList.add('show'); } });
+    map.on('movestart', ()=>{ if(mapReady) window._civariUserMoved=true; });
+    map.on('moveend', ()=>{ if(mapReady && window._civariUserMoved){ const b=document.getElementById('areaSearchBtn'); if(b) b.classList.add('show'); } });
     setTimeout(()=>{ mapReady=true; }, 900);
 }
 function updateMapMarkers(fit=true){
@@ -745,7 +745,7 @@ function searchThisArea(){
     areaBbox=[b.getSouth(),b.getWest(),b.getNorth(),b.getEast()].map(x=>x.toFixed(5)).join(',');
     favFilter=false; distanceMode=false;
     const btn=document.getElementById('areaSearchBtn'); if(btn) btn.classList.remove('show');
-    window._nearbyUserMoved=false;
+    window._civariUserMoved=false;
     loadVenues(true);       // liste: bbox, sayfalı  (applyView haritayı da bbox ile tazeler)
 }
 /* Konumuma dön (haritadaki buton) */
@@ -1148,10 +1148,10 @@ document.addEventListener('DOMContentLoaded',()=>{
        Mekan sayfasından geri dönmek gibi site içi gezinmelerde tekrar açılmaz.
        (Sekme kapatılıp yeniden açıldığında yeniden gösterilir.) */
     const introEl = document.getElementById('intro');
-    const introGorulduMu = (function(){ try { return sessionStorage.getItem('nearby_intro') === '1'; } catch(e){ return false; } })();
+    const introGorulduMu = (function(){ try { return sessionStorage.getItem('civari_intro') === '1'; } catch(e){ return false; } })();
     function introKapat(animasyonlu){
         if(!introEl) return;
-        try { sessionStorage.setItem('nearby_intro','1'); } catch(e){}
+        try { sessionStorage.setItem('civari_intro','1'); } catch(e){}
         introEl.classList.add('closed');
         document.getElementById('header').classList.add('show');
         if(animasyonlu) setTimeout(()=>{ introEl.style.display='none'; }, 800);

@@ -1,10 +1,10 @@
 -- =====================================================
---  NEARBY — SAHTE VERİ TEMİZLİĞİ  (2. adım)
---  phpMyAdmin > nearby_db > SQL > yapıştır > Git
+--  CİVARİ — SAHTE VERİ TEMİZLİĞİ  (2. adım)
+--  phpMyAdmin > civari_db > SQL > yapıştır > Git
 -- =====================================================
 --
 --  ⚠️  ÖNCE YEDEK AL!
---  phpMyAdmin > nearby_db > "Dışa Aktar" (Export) > Git  ile
+--  phpMyAdmin > civari_db > "Dışa Aktar" (Export) > Git  ile
 --  tüm veritabanının .sql yedeğini indir. Bu adım GERİ ALINAMAZ.
 --
 --  Bu script:

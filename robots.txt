@@ -17,4 +17,4 @@ Disallow: /db.php
 Disallow: /osm_config.php
 Disallow: /*.sql$
 
-Sitemap: https://nearby.com.tr/sitemap.php
+Sitemap: https://civari.com.tr/sitemap.php

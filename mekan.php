@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — MEKAN SAYFASI (SEO)
+ * CİVARİ — MEKAN SAYFASI (SEO)
  * ----------------------------
  * mekan.php?id=3  → her mekanın kendi adresi olur. Sayfa sunucuda hazır
  * HTML olarak üretilir; böylece Google mekanı okuyup indeksleyebilir
@@ -151,13 +151,13 @@ function schema_saatleri(string $oh): array {
     return $spec;
 }
 
-$SITE = 'https://nearby.com.tr';
+$SITE = 'https://civari.com.tr';
 
 if (!empty($notFound)):
 ?>
 <!DOCTYPE html><html lang="tr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mekan bulunamadı — Nearby</title>
+<title>Mekan bulunamadı — Civari</title>
 <meta name="robots" content="noindex">
 <style>body{font-family:'Segoe UI',system-ui,sans-serif;background:#fafafa;color:#1c1c1e;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;padding:24px;text-align:center}
 a{display:inline-block;margin-top:18px;background:#ff9900;color:#fff;text-decoration:none;font-weight:700;padding:13px 30px;border-radius:30px}
@@ -184,7 +184,7 @@ $renk      = $CAT_RENK[$kategori] ?? '#ff9900';
 
 $metaAciklama = $aciklama !== ''
     ? mb_substr(preg_replace('/\s+/u', ' ', $aciklama), 0, 155)
-    : "$ad — Ankara" . ($ilce !== '' ? " $ilce" : '') . " bölgesinde $kategori." . ($adres !== '' ? " Adres: $adres." : '') . " Nearby'de keşfet.";
+    : "$ad — Ankara" . ($ilce !== '' ? " $ilce" : '') . " bölgesinde $kategori." . ($adres !== '' ? " Adres: $adres." : '') . " Civari'de keşfet.";
 
 /* Google için yapılandırılmış veri (JSON-LD) */
 $SCHEMA_TIP = ['Kafe'=>'CafeOrCoffeeShop','Restoran'=>'Restaurant','Bar'=>'BarOrPub','Tatlıcı'=>'Bakery'];
@@ -217,11 +217,11 @@ if ($avg !== null && count($reviews) > 0) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title><?= e($ad) ?> — <?= e($kategori) ?><?= $ilce !== '' ? ', ' . e($ilce) : '' ?> Ankara | Nearby</title>
+<title><?= e($ad) ?> — <?= e($kategori) ?><?= $ilce !== '' ? ', ' . e($ilce) : '' ?> Ankara | Civari</title>
 <meta name="description" content="<?= e($metaAciklama) ?>">
 <link rel="canonical" href="<?= e($SITE) ?>/mekan.php?id=<?= (int)$venue['id'] ?>">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Nearby">
+<meta property="og:site_name" content="Civari">
 <meta property="og:title" content="<?= e($ad) ?> — <?= e($kategori) ?>, Ankara">
 <meta property="og:description" content="<?= e($metaAciklama) ?>">
 <meta property="og:url" content="<?= e($SITE) ?>/mekan.php?id=<?= (int)$venue['id'] ?>">
@@ -236,7 +236,7 @@ if ($avg !== null && count($reviews) > 0) {
 <link rel="stylesheet" href="https://unpkg.com/mail@example.com/dist/leaflet.css">
 <script type="application/ld+json"><?= json_encode($ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?></script>
 <!-- Ölçüm kodu yalnızca çerez onayı verilmişse yüklenir (cerez.js) -->
-<script>window.NEARBY_GA_ID = 'G-4MY8MMLRQX';</script>
+<script>window.CİVARİ_GA_ID = 'G-4MY8MMLRQX';</script>
 <script src="cerez.js?v=23" defer></script>
 <style>
   :root{ --primary:#ff9900; --primary-dark:#e07f00; --ink:#1c1c1e; --muted:#64748b; --gray:#d2d2d1;
@@ -339,7 +339,7 @@ if ($avg !== null && count($reviews) > 0) {
 <body>
 
 <div class="topbar"><div class="wrap">
-  <a class="logo" href="index.html">Nearby<span>.</span></a>
+  <a class="logo" href="index.html">Civari<span>.</span></a>
   <a class="back" href="index.html">← Tüm mekanlar</a>
 </div></div>
 
@@ -419,7 +419,7 @@ if ($avg !== null && count($reviews) > 0) {
       <?php foreach ($fotolar as $i => $ft): ?>
         <figure>
           <img src="<?= e($ft['url']) ?>" alt="<?= e($ad . ' — fotoğraf ' . ($i+1) . ($ft['baslik'] ? ': ' . $ft['baslik'] : '')) ?>"
-               loading="<?= $i < 2 ? 'eager' : 'lazy' ?>" onclick="nearbyBuyut(this.src)" style="cursor:zoom-in"
+               loading="<?= $i < 2 ? 'eager' : 'lazy' ?>" onclick="civariBuyut(this.src)" style="cursor:zoom-in"
                onerror="this.closest('figure').style.display='none'">
           <?php if (!empty($ft['baslik'])): ?><figcaption><?= e($ft['baslik']) ?></figcaption><?php endif; ?>
         </figure>
@@ -453,33 +453,33 @@ if ($avg !== null && count($reviews) > 0) {
 </div>
 
 <div class="foot">
-  © <?= date('Y') ?> Nearby — Ankara'nın merkezinde mekan keşfi.<br>
+  © <?= date('Y') ?> Civari — Ankara'nın merkezinde mekan keşfi.<br>
   <a href="index.html">Anasayfa</a> · <a href="hakkimizda.html">Hakkımızda</a> · <a href="gizlilik.html">Gizlilik</a> ·
   <a href="kvkk.html">KVKK</a> · <a href="cerez-politikasi.html">Çerez Politikası</a> ·
   <a href="kullanim-kosullari.html">Kullanım Koşulları</a> · <a href="mailto:mail@example.com">mail@example.com</a>
 </div>
 
 <!-- Fotoğraf büyütme katmanı -->
-<div class="g-buyut" id="gBuyut" onclick="nearbyKapat()" role="dialog" aria-label="Fotoğraf görüntüleyici">
-  <button class="g-kapat" onclick="nearbyKapat()" aria-label="Kapat">×</button>
+<div class="g-buyut" id="gBuyut" onclick="civariKapat()" role="dialog" aria-label="Fotoğraf görüntüleyici">
+  <button class="g-kapat" onclick="civariKapat()" aria-label="Kapat">×</button>
   <img id="gBuyutResim" src="" alt="">
 </div>
 
 <script src="https://unpkg.com/mail@example.com/dist/leaflet.js"></script>
 <script>
   /* Galeri: oklarla kaydırma + tam ekran görüntüleme */
-  function nearbyBuyut(src){
+  function civariBuyut(src){
     var k = document.getElementById('gBuyut');
     document.getElementById('gBuyutResim').src = src;
     k.classList.add('acik');
     document.body.style.overflow = 'hidden';
   }
-  function nearbyKapat(){
+  function civariKapat(){
     document.getElementById('gBuyut').classList.remove('acik');
     document.getElementById('gBuyutResim').src = '';
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') nearbyKapat(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') civariKapat(); });
 
   (function(){
     var g = document.getElementById('galeri');

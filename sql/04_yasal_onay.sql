@@ -1,6 +1,6 @@
 -- =====================================================
---  NEARBY — YASAL ONAY KAYDI  (4. adım)
---  phpMyAdmin > nearby_db > SQL sekmesi > yapıştır > Git
+--  CİVARİ — YASAL ONAY KAYDI  (4. adım)
+--  phpMyAdmin > civari_db > SQL sekmesi > yapıştır > Git
 -- =====================================================
 --
 --  Bu script users tablosuna iki sütun ekler. Mevcut veriye DOKUNMAZ,

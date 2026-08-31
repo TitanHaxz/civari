@@ -1,20 +1,20 @@
-# Nearby — Mobil Uygulama (iOS + Android)
+# Civari — Mobil Uygulama (iOS + Android)
 
-Bu klasör, **Capacitor** ile Nearby'yi native bir mobil uygulamaya dönüştürür.
-Uygulama, canlı **https://nearby.com.tr** sitesini native bir kabuk içinde açar →
+Bu klasör, **Capacitor** ile Civari'yi native bir mobil uygulamaya dönüştürür.
+Uygulama, canlı **https://civari.com.tr** sitesini native bir kabuk içinde açar →
 **iki platformda da birebir aynı özellikler**, tek kaynak, otomatik güncelleme
 (sitede yaptığın değişiklik anında uygulamada da görünür, yeniden yayın gerekmez).
 
 Native olarak eklenen: uygulama ikonu, açılış (splash) ekranı, durum çubuğu rengi,
 **gerçek GPS konumu izinleri** (Yakınımdakiler için).
 
-- Uygulama adı: **Nearby**  ·  Paket kimliği: **com.nearby.app**
+- Uygulama adı: **Civari**  ·  Paket kimliği: **com.civari.app**
 
 ---
 
 ## 📱 HEMEN TEST ET (Android)
-Masaüstündeki **`Nearby.apk`** dosyasını Android telefonuna at, dokun, "bilinmeyen
-kaynak"a izin ver, kur. Uygulama açılıp canlı Nearby'yi gösterir.
+Masaüstündeki **`Civari.apk`** dosyasını Android telefonuna at, dokun, "bilinmeyen
+kaynak"a izin ver, kur. Uygulama açılıp canlı Civari'yi gösterir.
 > Bu bir **debug** APK'sı — test için. Play Store için aşağıdaki "release" adımları.
 
 ---
@@ -28,13 +28,13 @@ kaynak"a izin ver, kur. Uygulama açılıp canlı Nearby'yi gösterir.
 
 ## Kurulum (bir kez)
 ```bash
-cd nearby-mobile
+cd civari-mobile
 npm install
 ```
 
 ## Android — debug APK (test)
 ```bash
-cd nearby-mobile/android
+cd civari-mobile/android
 gradlew.bat assembleDebug
 ```
 Çıktı: `android/app/build/outputs/apk/debug/app-debug.apk`
@@ -42,13 +42,13 @@ gradlew.bat assembleDebug
 ## Android — Play Store için release (AAB)
 1. **İmza anahtarı oluştur** (bir kez, güvende sakla — kaybedersen güncelleme yapamazsın):
    ```bash
-   keytool -genkey -v -keystore nearby.keystore -alias nearby -keyalg RSA -keysize 2048 -validity 10000
+   keytool -genkey -v -keystore civari.keystore -alias civari -keyalg RSA -keysize 2048 -validity 10000
    ```
 2. `android/keystore.properties` oluştur:
    ```
-   storeFile=../../nearby.keystore
+   storeFile=../../civari.keystore
    storePassword=SENIN_SIFREN
-   keyAlias=nearby
+   keyAlias=civari
    keyPassword=SENIN_SIFREN
    ```
    ve `android/app/build.gradle` içine imza yapılandırmasını ekle (Capacitor dokümanı:
@@ -63,7 +63,7 @@ gradlew.bat assembleDebug
 
 ## iOS — Mac'te
 ```bash
-cd nearby-mobile
+cd civari-mobile
 npx cap open ios        # Xcode açılır
 ```
 Xcode'da: Signing & Capabilities → kendi Apple Developer hesabını seç → Product > Archive →
@@ -79,7 +79,7 @@ App Store Connect'e yükle.
 
 ## 🔄 Nasıl güncellenir?
 - **İçerik/tasarım değişikliği (site):** Hiçbir şey yapma. Uygulama canlı siteyi
-  gösterdiği için `nearby.com.tr`'yi güncellemen yeter — app anında güncel olur,
+  gösterdiği için `civari.com.tr`'yi güncellemen yeter — app anında güncel olur,
   mağazaya yeniden yükleme gerekmez.
 - **Native değişiklik (ikon, izin, splash, eklenti):** `npx cap sync` → yeniden derle → mağazaya yükle.
 
@@ -96,5 +96,5 @@ App Store Connect'e yükle.
 - Uygulama internet gerektirir (canlı site). Bağlantı yoksa marka temalı bir
   "bağlanınca açılacak" ekranı görünür.
 - Apple, "sadece web sitesi sarmalayan" uygulamaları bazen reddeder (kural 4.2).
-  Nearby gerçek bir servis + konum kullandığı için genelde sorun olmaz; istenirse
+  Civari gerçek bir servis + konum kullandığı için genelde sorun olmaz; istenirse
   ileride push bildirim / paylaşım gibi native özellikler eklenip güçlendirilebilir.

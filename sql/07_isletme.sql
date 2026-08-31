@@ -1,6 +1,6 @@
 -- =====================================================
---  NEARBY — İŞLETME HESAPLARI  (7. adım)
---  phpMyAdmin > nearby_db > SQL sekmesi > yapıştır > Git
+--  CİVARİ — İŞLETME HESAPLARI  (7. adım)
+--  phpMyAdmin > civari_db > SQL sekmesi > yapıştır > Git
 -- =====================================================
 --
 --  Mevcut veriye ZARAR VERMEZ. Güvenle birden çok kez çalıştırılabilir.

@@ -1,4 +1,4 @@
-# NEARBY — SUNUCU GÜVENLİK AYARLARI (Apache sunucular için)
+# CİVARİ — SUNUCU GÜVENLİK AYARLARI (Apache sunucular için)
 # ==========================================================
 # Sunucun Plesk Windows/IIS ise bu dosya değil, web.config devreye girer.
 # İkisini birden bulundurmak zararsızdır; sunucu hangisini anlıyorsa onu kullanır.

@@ -1,5 +1,5 @@
 /* =====================================================
-   NEARBY — Stil Dosyası (v2)  | Palet kullanıcının orijinaliyle aynı
+   CİVARİ — Stil Dosyası (v2)  | Palet kullanıcının orijinaliyle aynı
    ===================================================== */
 :root {
     --primary: #ff9900; --primary-dark: #e07f00; --gray: #d2d2d1;
@@ -551,7 +551,7 @@ body.night .hero-eyebrow { color: #a5b4fc; background: rgba(99,102,241,.14); bor
 .custom-pin::after { width:9px; height:9px; }
 
 /* Küme (cluster) ikonu — marka turuncu */
-.nearby-cluster { display:flex; align-items:center; justify-content:center; border-radius:50%;
+.civari-cluster { display:flex; align-items:center; justify-content:center; border-radius:50%;
   background:radial-gradient(circle at 30% 30%, #ffbe4d, var(--primary)); color:#fff; font-weight:800;
   border:3px solid rgba(255,255,255,.92); box-shadow:0 6px 18px rgba(0,0,0,.35); font-family:var(--font-body); }
 .marker-cluster, .marker-cluster div { background:transparent !important; }
@@ -684,7 +684,7 @@ body.night .hero-radar::before { background: repeating-radial-gradient(circle, r
 body.night .hero-radar::after { background: conic-gradient(from 0deg, rgba(255,153,0,.28), rgba(255,153,0,.04) 22%, transparent 32%); }
 
 /* ===================================================== */
-/*  v16 — YENİ INTRO (Nearby Pin): açık, sade, markaya uygun */
+/*  v16 — YENİ INTRO (Civari Pin): açık, sade, markaya uygun */
 /* ===================================================== */
 #intro { background: radial-gradient(ellipse 90% 65% at 50% 40%, #fff8ee 0%, #ffffff 52%, #fdf2e0 100%); color: var(--dark); }
 .intro-aurora { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }

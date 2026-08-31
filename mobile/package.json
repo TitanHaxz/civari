@@ -1,8 +1,8 @@
 {
-  "name": "nearby-mobile",
+  "name": "civari-mobile",
   "version": "1.0.0",
   "private": true,
-  "description": "Nearby — iOS + Android mobil uygulama (Capacitor kabuğu, canlı nearby.com.tr)",
+  "description": "Civari — iOS + Android mobil uygulama (Capacitor kabuğu, canlı civari.com.tr)",
   "scripts": {
     "sync": "cap sync",
     "open:android": "cap open android",

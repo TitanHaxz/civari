@@ -1,8 +1,8 @@
 <?php
 /*
- * NEARBY — VERİTABANI KURULUM SAYFASI
+ * CİVARİ — VERİTABANI KURULUM SAYFASI
  * ===================================
- * Tarayıcıdan aç:  https://nearby.com.tr/kurulum.php?token=KURULUM_ANAHTARI
+ * Tarayıcıdan aç:  https://civari.com.tr/kurulum.php?token=KURULUM_ANAHTARI
  *
  * NE YAPAR?
  *   Veritabanındaki eksik tablo ve sütunları bulur, sadece eksik olanları ekler.
@@ -170,7 +170,7 @@ $hepsiTamam = !in_array(false, $kritik, true);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Veritabanı Kurulumu — Nearby</title>
+<title>Veritabanı Kurulumu — Civari</title>
 <style>
   :root{--primary:#ff9900;--primary-dark:#e07f00;--ink:#1c1c1e;--muted:#64748b;--gray:#d2d2d1;
         --ok:#15803d;--ok-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--sari:#b45309;--sari-bg:#fef3c7}
@@ -205,7 +205,7 @@ $hepsiTamam = !in_array(false, $kritik, true);
 </head>
 <body>
 <div class="sar">
-  <h1>Nearby — Veritabanı Kurulumu</h1>
+  <h1>Civari — Veritabanı Kurulumu</h1>
   <p class="alt">Eksik tablo ve sütunları bulup ekler. Mevcut verilere dokunmaz, defalarca çalıştırılabilir.</p>
 
   <?php if ($hepsiTamam): ?>

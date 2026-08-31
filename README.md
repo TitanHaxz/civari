@@ -1,73 +1,96 @@
-# Nearby - Venue Discovery PWA
+<h1 align="center">Civari</h1>
 
-> Location-based venue discovery: find places around you on a map, check in, review them, and climb a leaderboard. Installable as a mobile app, with a self-service panel for business owners.
->
-> *Konum tabanli mekan kesif platformu - harita, check-in, yorum, isletme paneli ve kurulabilir mobil uygulama.*
+<p align="center">
+  <b>Çevrende ne var, keşfet.</b><br/>
+  Ankara merkezli, yerinde doğrulanmış mekân keşif platformu — canlı yayında.
+</p>
 
-![PHP](https://img.shields.io/badge/PHP-8-777BB4?style=flat-square&logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![Leaflet](https://img.shields.io/badge/Leaflet-Maps-199900?style=flat-square&logo=leaflet&logoColor=white)
-![PWA](https://img.shields.io/badge/PWA-installable-5A0FC8?style=flat-square&logo=pwa)
-![Capacitor](https://img.shields.io/badge/Capacitor-Android%2FiOS-119EFF?style=flat-square&logo=capacitor&logoColor=white)
+<p align="center">
+  <a href="https://civari.com.tr"><img src="https://img.shields.io/badge/canl%C4%B1-civari.com.tr-F59E0B?style=for-the-badge&logo=googlechrome&logoColor=white&labelColor=0D1117"/></a>
+  <img src="https://img.shields.io/badge/PHP-8-777BB4?style=for-the-badge&logo=php&logoColor=white&labelColor=0D1117"/>
+  <img src="https://img.shields.io/badge/MySQL-8-4479A1?style=for-the-badge&logo=mysql&logoColor=white&labelColor=0D1117"/>
+  <img src="https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=leaflet&logoColor=white&labelColor=0D1117"/>
+  <img src="https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white&labelColor=0D1117"/>
+</p>
 
-## What it does
+---
 
-| Feature | Detail |
+## Ürün
+
+Civari, kullanıcının bulunduğu yerin çevresindeki kafe, restoran, bar ve tatlıcıları haritada gösteren; check-in, değerlendirme ve favori özellikleriyle bir keşif alışkanlığına dönüştüren bir platform. Tasarımından sunucu yönetimine kadar tek başıma geliştirdim ve yayına aldım.
+
+Mekân verisi elle girilmiyor: **OpenStreetMap/Overpass API**'den otomatik çekilip yerel şemaya eşleniyor, sonra "yerinde doğrulandı" işaretiyle elle teyit ediliyor.
+
+<p align="center">
+  <img src="docs/screenshots/01-landing.png" width="49%" alt="Açılış"/>
+  <img src="docs/screenshots/02-venue-detail.png" width="49%" alt="Mekân detayı"/>
+</p>
+
+## Özellikler
+
+| Alan | Detay |
 |---|---|
-| **Map discovery** | Leaflet map centred on the user, venues loaded by viewport |
-| **OpenStreetMap ingest** | `import_osm.php` pulls venues from the Overpass API and normalises them into the local schema |
-| **Check-in & leaderboard** | Users check in at venues and earn a place on the leaderboard |
-| **Reviews & favourites** | Per-venue ratings, comments and a personal favourites list |
-| **Business panel** | Owners claim a venue (`isletme.php`) and manage details and photo gallery |
-| **Admin panel** | Moderation of venues, reviews and ownership claims |
-| **Installable PWA** | Web app manifest + service worker; installs to the home screen |
-| **Native shell** | Capacitor wrapper under `mobile/` for Android/iOS packaging |
-| **Legal pages** | KVKK, privacy, cookie and terms pages wired into a consent flow |
+| **Harita keşfi** | Leaflet haritası; mekânlar görünen alana (viewport) göre yükleniyor |
+| **OSM içe aktarma** | `import_osm.php` Overpass API'den çeker, etiketleri yerel şemaya eşler |
+| **Check-in & liderlik** | Kullanıcı mekânda check-in yapar, puan kazanır, liderlik tablosuna girer |
+| **Değerlendirme & favori** | Mekân bazlı puan, yorum ve kişisel favori listesi |
+| **İşletme paneli** | İşletme sahibi mekânını sahiplenir (`isletme.php`), bilgi ve galerisini yönetir |
+| **Yönetim paneli** | Mekân, yorum ve sahiplik taleplerinin moderasyonu |
+| **Kurulabilir PWA** | Web app manifest + service worker; ana ekrana kurulur |
+| **Mobil kabuk** | `mobile/` altında Capacitor sarmalayıcı (Android/iOS paketleme) |
+| **Yasal** | KVKK, gizlilik, çerez ve kullanım koşulları sayfaları + onay akışı |
 
-## Architecture
+## Mimari
 
 ```
-index.html + script.js       Map UI, viewport-driven venue loading
-get_venues.php               Bounding-box venue query (JSON)
-db.php                       PDO connection, tries 127.0.0.1 then localhost
-auth.php                     Registration / login, password hashing
-checkin.php                  Check-in + points
-reviews.php  favorites.php   Per-user venue interactions
-isletme*.php                 Business-owner claim and management
-import_osm.php               Overpass API -> local schema
-sql/                         Schema migrations (no data)
-mobile/                      Capacitor native wrapper
-sw.js  manifest.json         PWA offline shell
+index.html + script.js       Harita arayüzü, viewport bazlı yükleme
+get_venues.php               Sınırlayıcı kutu (bbox) sorgusu → JSON
+db.php                       PDO bağlantısı; 127.0.0.1 ve localhost'u sırayla dener
+auth.php                     Kayıt / giriş, parola hash'leme, oran sınırlama
+checkin.php                  Check-in + puanlama
+reviews.php · favorites.php  Kullanıcı-mekân etkileşimleri
+mekan.php                    Mekân detay sayfası (SSR)
+isletme*.php                 İşletme sahibi sahiplenme ve yönetimi
+import_osm.php               Overpass API → yerel şema
+sql/                         Şema migrasyonları (veri içermez)
+mobile/                      Capacitor yerel kabuk
+sw.js · manifest.json        PWA çevrimdışı kabuğu
 ```
 
-### Design decisions worth noting
+### Kayda değer tasarım kararları
 
-- **Venues are fetched by map viewport, not all at once.** The client sends its bounding box and `get_venues.php` returns only what fits, so the payload stays flat as the dataset grows.
-- **OpenStreetMap as the seed source.** Rather than hand-entering thousands of venues, `import_osm.php` queries Overpass and maps OSM tags onto the local schema - the database bootstraps itself for any city.
-- **The connection layer tries two hosts.** Shared hosting is inconsistent about whether `localhost` or `127.0.0.1` resolves to the MySQL socket, so `db.php` attempts both before failing.
+**Mekânlar hepsi birden değil, harita görünümüne göre çekiliyor.** İstemci sınırlayıcı kutusunu gönderir, `get_venues.php` yalnızca o alana düşenleri döner. Veri kümesi büyüdükçe yanıt boyutu sabit kalır.
 
-## Running it locally
+**Tohum veri kaynağı OpenStreetMap.** Binlerce mekânı elle girmek yerine `import_osm.php` Overpass'a sorgu atıp OSM etiketlerini yerel şemaya eşler — veritabanı herhangi bir şehir için kendini besleyebilir. Doğruluk için üzerine elle "yerinde doğrulandı" katmanı bindirilir.
 
-**Requirements:** PHP 8+, MySQL 8+
+**Bağlantı katmanı iki host dener.** Paylaşımlı hostingler MySQL soketine `localhost` mu `127.0.0.1` mi çözümlediği konusunda tutarsız; `db.php` hata vermeden önce ikisini de dener.
+
+**Servis çalışanı yalnızca kabuğu önbelleğe alır, veriyi değil.** Zayıf bağlantıda uygulama açılır, ancak mekân listesi her zaman tazedir.
+
+## Yerel kurulum
+
+**Gereksinimler:** PHP 8+, MySQL 8+
 
 ```bash
-git clone https://github.com/<user>/php-venue-discovery-pwa.git
-cd php-venue-discovery-pwa
+git clone https://github.com/canogluy06-byte/civari.git
+cd civari
 mysql -u root -p < sql/01_schema_osm.sql
 ```
 
-Apply the remaining migrations in `sql/` in numeric order, set your credentials in `db.php`, then:
+Kalan migrasyonları `sql/` içindeki sıra numarasına göre uygulayın, `db.php` içindeki kimlik bilgilerini kendinizinkiyle değiştirin ve çalıştırın:
 
 ```bash
 php -S localhost:8000
 ```
 
-Populate venues from OpenStreetMap:
+Mekânları OpenStreetMap'ten doldurmak için:
 
 ```bash
 php import_osm.php
 ```
 
-## A note on this repository
+## Bu depo hakkında
 
-Portfolio version of a live product. Database credentials, seed data containing real business records, uploaded media and server addresses have been removed; only the schema and application code remain. Configuration values are `CHANGE_ME` placeholders - set your own before running.
+Canlı ürünün **portfolyo sürümüdür**. Veritabanı kimlik bilgileri, gerçek işletme kayıtları içeren tohum verisi, yüklenen görseller ve sunucu adresleri kaldırılmıştır; şema ve uygulama kodu olduğu gibidir. Yapılandırma değerleri `CHANGE_ME` yer tutucusudur — çalıştırmadan önce kendi değerlerinizi girin.
+
+Ekran görüntüleri canlı siteden alınmıştır; işletme telefonu maskelenmiştir.

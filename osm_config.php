@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — OSM / Overpass İçe Aktarma Yapılandırması
+ * CİVARİ — OSM / Overpass İçe Aktarma Yapılandırması
  * -----------------------------------------------------
  * import_osm.php bu dosyayı kullanır. Buradaki değerleri değiştirerek
  * yeni şehir ekleyeb, kategori eşlemesini genişletebilirsin.
@@ -61,7 +61,7 @@ function osm_is_quality(array $t): bool {
 
 /*
  * ── KATEGORİ HARİTALAMA (Mapping Layer) ────────────────────────
- * OSM etiketi "key=value" => [Nearby kategorisi, price_level(1-3), alcohol(0/1), temel etiketler]
+ * OSM etiketi "key=value" => [Civari kategorisi, price_level(1-3), alcohol(0/1), temel etiketler]
  * Frontend'in mevcut kategorileri: Kafe, Restoran, Bar, Market, Ders & Kitap,
  * Eğlence, Doğa, Kamp. Ek olarak: Eczane, Konaklama (frontend'e sonra pill eklenecek).
  */
@@ -104,7 +104,7 @@ function osm_wikidata_image(string $qid): ?string {
     $cache[$qid] = null;
     if (!function_exists('curl_init')) return null;
     $ch = curl_init('https://www.wikidata.org/wiki/Special:EntityData/' . rawurlencode($qid) . '.json');
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>8, CURLOPT_CONNECTTIMEOUT=>5, CURLOPT_USERAGENT=>'NearbyOSMImporter/1.0 (+https://nearby.com.tr)']);
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>8, CURLOPT_CONNECTTIMEOUT=>5, CURLOPT_USERAGENT=>'CivariOSMImporter/1.0 (+https://civari.com.tr)']);
     $body = curl_exec($ch); curl_close($ch);
     if (!$body) return null;
     $j = json_decode($body, true);
@@ -132,7 +132,7 @@ function osm_pick_image(array $tags, string $category, int $osmId): ?string {
     return $imgs[abs($osmId) % count($imgs)];
 }
 
-// Bir OSM elemanının key=value'sını Nearby kategorisine çevirir.
+// Bir OSM elemanının key=value'sını Civari kategorisine çevirir.
 function osm_resolve_category(array $tags, array $map): ?array {
     foreach ($map as $kv => $info) {
         [$k, $v] = explode('=', $kv, 2);

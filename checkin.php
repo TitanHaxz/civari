@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Buradayım (Check-in)
+ * CİVARİ — Buradayım (Check-in)
  * POST venue_id=..  (GİRİŞ GEREKLİ)  -> günde 1 kez, +2 puan
  */
 ini_set('display_errors', '0'); ini_set('log_errors', '1'); error_reporting(E_ALL);
@@ -32,7 +32,7 @@ try {
     $cc = $pdo->prepare("SELECT COUNT(*) FROM checkins WHERE user_id=?"); $cc->execute([$uid]); $checks=(int)$cc->fetchColumn();
     $points = $reviews*10 + $checks*2;
 
-    out(['status'=>'success','message'=>'Buradasın! +2 Nearby Puan 🎉','points'=>$points,'checkins'=>$checks]);
+    out(['status'=>'success','message'=>'Buradasın! +2 Civari Puan 🎉','points'=>$points,'checkins'=>$checks]);
 } catch (Exception $e) {
     error_log('Check-in: '.$e->getMessage());
     out(['status'=>'error','message'=>'Check-in yapılamadı (checkins tablosu kurulu mu?).']);

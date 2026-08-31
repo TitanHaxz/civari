@@ -1,9 +1,9 @@
 {
-  "appId": "com.nearby.app",
-  "appName": "Nearby",
+  "appId": "com.civari.app",
+  "appName": "Civari",
   "webDir": "www",
   "server": {
-    "url": "https://nearby.com.tr",
+    "url": "https://civari.com.tr",
     "cleartext": false,
     "androidScheme": "https",
     "iosScheme": "https"

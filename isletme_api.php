@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — İŞLETME PANELİ API
+ * CİVARİ — İŞLETME PANELİ API
  * ---------------------------
  * isletme.php sayfasının arka ucu. Bir işletme sahibi YALNIZCA kendi mekanını
  * görebilir ve düzenleyebilir; her istekte sahiplik kontrolü yapılır.

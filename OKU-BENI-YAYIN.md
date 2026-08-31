@@ -1,4 +1,4 @@
-# Nearby — Ankara Vitrini Yayın Kılavuzu
+# Civari — Ankara Vitrini Yayın Kılavuzu
 
 Bu klasördeki her şey hazır. Aşağıdaki adımları **sırayla** uygularsan site Ankara vitriniyle canlıya çıkar.
 
@@ -6,7 +6,7 @@ Bu klasördeki her şey hazır. Aşağıdaki adımları **sırayla** uygularsan 
 
 ## ⚠️ ADIM 0 — ÖNCE YEDEK AL (atlanamaz)
 
-1. **Veritabanı yedeği:** Plesk → Veritabanları → phpMyAdmin → `nearby_db` → **Dışa Aktar (Export)** → Git → dosyayı bilgisayarına indir.
+1. **Veritabanı yedeği:** Plesk → Veritabanları → phpMyAdmin → `civari_db` → **Dışa Aktar (Export)** → Git → dosyayı bilgisayarına indir.
 2. **Dosya yedeği:** Plesk → Dosya Yöneticisi → `httpdocs` klasörünü seç → **Arşive Ekle (Add to Archive)** → oluşan .zip'i indir.
 
 Bir şey ters giderse bu iki yedekle her şeyi geri alırsın. **Bu adımı yapmadan devam etme.**
@@ -15,7 +15,7 @@ Bir şey ters giderse bu iki yedekle her şeyi geri alırsın. **Bu adımı yapm
 
 ## ADIM 1 — Dosyaları yükle
 
-`NearbyEnSon` klasöründeki **tüm dosyaları** Plesk'te `httpdocs` klasörüne yükle (üzerine yaz).
+`CivariEnSon` klasöründeki **tüm dosyaları** Plesk'te `httpdocs` klasörüne yükle (üzerine yaz).
 
 Yüklenecekler arasında yeni dosyalar da var:
 - `mekan.php` — mekan sayfaları (Google'ın indeksleyeceği sayfalar)
@@ -37,14 +37,14 @@ Yüklenecekler arasında yeni dosyalar da var:
 
 ## ADIM 2 — Veritabanını Ankara'ya çevir
 
-phpMyAdmin → `nearby_db` → **SQL** sekmesi.
+phpMyAdmin → `civari_db` → **SQL** sekmesi.
 
 ### 2a) Önce tablo yapısını kur (tarayıcıdan, tek tık)
 
 Tarayıcıda şu adresi aç:
 
 ```
-https://nearby.com.tr/kurulum.php?token=kurulum-145a63afd421176f
+https://civari.com.tr/kurulum.php?token=kurulum-145a63afd421176f
 ```
 
 Açılan sayfada **"Eksikleri Tamamla"** düğmesine bas. Sayfa veritabanındaki eksik tablo ve sütunları bulup ekler; mevcut verilere dokunmaz, defalarca çalıştırılabilir.
@@ -55,7 +55,7 @@ Sonunda **"✓ Veritabanı hazır"** yazısını görmelisin.
 
 ### 2b) Sonra veriyi yükle (phpMyAdmin)
 
-phpMyAdmin → `nearby_db` → **SQL** sekmesi. İki dosyayı sırayla yapıştır → Git:
+phpMyAdmin → `civari_db` → **SQL** sekmesi. İki dosyayı sırayla yapıştır → Git:
 
 1. `03_ankara_vitrin.sql` — tüm eski mekanları (8 şehirlik OSM verisi) siler, yerine 5 gerçek Ankara mekanını koyar. Kullanıcı hesapları silinmez. Sonunda 5 satır görmelisin: Dharma Coffee, Kakule Kahve, Göksu Lokantası, Flamingo Pastanesi, Kıtır.
 2. `06_gorseller.sql` — `uploads` klasöründeki 20 görseli 5 mekana dağıtır. Sonunda her mekanın karşısında **4 fotoğraf** yazmalı.
@@ -88,17 +88,17 @@ Tarayıcıda sırayla aç:
 
 | Adres | Görmen gereken |
 |---|---|
-| `nearby.com.tr` | Giriş yapmadan 5 mekan görünüyor, üstte "Ankara'da Öne Çıkanlar" vitrini, altta çerez bildirimi |
-| `nearby.com.tr/mekan.php?id=1` | Dharma Coffee sayfası: kapak fotoğrafı, kaydırmalı 4'lü galeri, çalışma saatleri, harita |
-| `nearby.com.tr/kvkk.html` | KVKK Aydınlatma Metni |
-| `nearby.com.tr/cerez-politikasi.html` | Çerez Politikası |
-| `nearby.com.tr/kullanim-kosullari.html` | Kullanım Koşulları |
-| `nearby.com.tr/sitemap.php` | 11 adresli sayfa listesi (XML görünümlü) |
-| `nearby.com.tr/robots.txt` | Metin dosyası |
-| `nearby.com.tr/admin.php` | Yeni şifreyle giriş · "İşletme Başvuruları" sekmesi görünmeli |
-| `nearby.com.tr/isletme.php` | Giriş yapmadan açılırsa ana sayfaya atmalı (yalnızca işletme hesapları girer) |
-| `nearby.com.tr/db.php` | **404 hatası vermeli** (veritabanı şifresi korunuyor) |
-| `http://nearby.com.tr` (baştaki s olmadan) | Otomatik olarak `https://`'ye dönmeli |
+| `civari.com.tr` | Giriş yapmadan 5 mekan görünüyor, üstte "Ankara'da Öne Çıkanlar" vitrini, altta çerez bildirimi |
+| `civari.com.tr/mekan.php?id=1` | Dharma Coffee sayfası: kapak fotoğrafı, kaydırmalı 4'lü galeri, çalışma saatleri, harita |
+| `civari.com.tr/kvkk.html` | KVKK Aydınlatma Metni |
+| `civari.com.tr/cerez-politikasi.html` | Çerez Politikası |
+| `civari.com.tr/kullanim-kosullari.html` | Kullanım Koşulları |
+| `civari.com.tr/sitemap.php` | 11 adresli sayfa listesi (XML görünümlü) |
+| `civari.com.tr/robots.txt` | Metin dosyası |
+| `civari.com.tr/admin.php` | Yeni şifreyle giriş · "İşletme Başvuruları" sekmesi görünmeli |
+| `civari.com.tr/isletme.php` | Giriş yapmadan açılırsa ana sayfaya atmalı (yalnızca işletme hesapları girer) |
+| `civari.com.tr/db.php` | **404 hatası vermeli** (veritabanı şifresi korunuyor) |
+| `http://civari.com.tr` (baştaki s olmadan) | Otomatik olarak `https://`'ye dönmeli |
 
 Son iki satır güvenlik ayarlarının çalıştığını gösterir. `db.php` içerik gösteriyorsa ya da http https'e dönmüyorsa, `web.config` dosyası yüklenmemiş demektir — bana haber ver.
 
@@ -106,16 +106,16 @@ Telefondan da bir kez bak — özellikle ana sayfa ve harita.
 
 ### Güvenlik başlıklarını doğrula (isteğe bağlı ama önerilir)
 
-[securityheaders.com](https://securityheaders.com) adresine `nearby.com.tr` yazıp tara. Yükleme doğruysa **A** veya **A+** not almalısın. Düşük not alırsan bana ekran görüntüsü gönder.
+[securityheaders.com](https://securityheaders.com) adresine `civari.com.tr` yazıp tara. Yükleme doğruysa **A** veya **A+** not almalısın. Düşük not alırsan bana ekran görüntüsü gönder.
 
 ---
 
 ## ADIM 5 — Google'a haber ver (SEO)
 
-1. [Google Search Console](https://search.google.com/search-console) → **Mülk Ekle** → "URL öneki" → `https://nearby.com.tr` yaz.
+1. [Google Search Console](https://search.google.com/search-console) → **Mülk Ekle** → "URL öneki" → `https://civari.com.tr` yaz.
 2. Doğrulama yöntemi olarak **HTML etiketi**'ni seç. Sana `<meta name="google-site-verification" ...>` diye bir satır verecek — o satırı bana gönder, `index.html` içine ekleyeyim. (Ya da Plesk'in DNS doğrulama yöntemini kullan.)
 3. Doğrulandıktan sonra sol menüden **Site Haritaları** → `sitemap.php` yaz → Gönder.
-4. Üstteki arama kutusuna `https://nearby.com.tr/mekan.php?id=1` yapıştır → **Dizine ekleme iste**. Aynısını 2, 3, 4, 5 için tekrarla.
+4. Üstteki arama kutusuna `https://civari.com.tr/mekan.php?id=1` yapıştır → **Dizine ekleme iste**. Aynısını 2, 3, 4, 5 için tekrarla.
 
 Google'ın sayfaları taraması genelde birkaç gün, bazen 2 haftayı bulur.
 
@@ -178,7 +178,7 @@ Stok görselleri silmek için aynı listede **✕** düğmesine bas. Hepsini sil
 ### Sende kalan yasal yükümlülükler
 
 **1. VERBİS kaydı — muhtemelen gerekmiyor**
-Yıllık çalışan sayın 50'den az ve yıllık mali bilanço toplamın 25 milyon TL'den azsa, ana faaliyetin özel nitelikli veri işlemek değilse VERBİS'e kayıt zorunluluğun yok. Nearby bu kapsamda. İleride şirketleşip büyürsen [verbis.kvkk.gov.tr](https://verbis.kvkk.gov.tr) üzerinden kaydolman gerekebilir.
+Yıllık çalışan sayın 50'den az ve yıllık mali bilanço toplamın 25 milyon TL'den azsa, ana faaliyetin özel nitelikli veri işlemek değilse VERBİS'e kayıt zorunluluğun yok. Civari bu kapsamda. İleride şirketleşip büyürsen [verbis.kvkk.gov.tr](https://verbis.kvkk.gov.tr) üzerinden kaydolman gerekebilir.
 
 **2. Ticari faaliyet başlarsa** (işletmelerden para almaya başladığında)
 - Şirket kurman (şahıs şirketi yeterli) ve vergi mükellefiyeti gerekir.
@@ -195,7 +195,7 @@ Ticari elektronik ileti göndermek için **İYS (İleti Yönetim Sistemi)** kayd
 - Hukuka aykırı içerik bildirimi gelirse gecikmeksizin değerlendir ve gerekiyorsa kaldır (5651 s.K.).
 - Bir veri ihlali (sızıntı) yaşanırsa, öğrendiğin andan itibaren **72 saat içinde** Kişisel Verileri Koruma Kurulu'na bildir.
 
-> ⚠️ **Önemli not:** Bu metinler, Nearby'nin mevcut işleyişine göre hazırlanmış sağlam birer taslaktır ve benzer platformların standart uygulamalarını karşılar. Ancak ben avukat değilim ve bu bir hukuki danışmanlık değildir. Ticari gelir elde etmeye başlamadan önce metinleri bir avukata gözden geçirtmeni öneririm — özellikle sorumluluk sınırlaması ve mekanların ticari haklarıyla ilgili bölümleri.
+> ⚠️ **Önemli not:** Bu metinler, Civari'nin mevcut işleyişine göre hazırlanmış sağlam birer taslaktır ve benzer platformların standart uygulamalarını karşılar. Ancak ben avukat değilim ve bu bir hukuki danışmanlık değildir. Ticari gelir elde etmeye başlamadan önce metinleri bir avukata gözden geçirtmeni öneririm — özellikle sorumluluk sınırlaması ve mekanların ticari haklarıyla ilgili bölümleri.
 
 ---
 

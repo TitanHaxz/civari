@@ -1,5 +1,5 @@
 /* =====================================================
-   NEARBY — ÇEREZ ONAYI + ÖLÇÜM (KVKK / ePrivacy uyumlu)
+   CİVARİ — ÇEREZ ONAYI + ÖLÇÜM (KVKK / ePrivacy uyumlu)
    -----------------------------------------------------
    Yasal kural: Zorunlu olmayan çerezler (ölçüm/analitik dahil) kullanıcı
    AÇIKÇA ONAY VERMEDEN çalıştırılamaz. Bu dosya şunu garanti eder:
@@ -9,12 +9,12 @@
      • Onay kararı tarayıcıda 6 ay saklanır; kullanıcı istediği an değiştirebilir
        (her sayfanın altındaki "Çerez Ayarları" bağlantısı).
 
-   Ölçüm kimliği index.html / mekan.php içinde window.NEARBY_GA_ID olarak tanımlıdır.
+   Ölçüm kimliği index.html / mekan.php içinde window.CİVARİ_GA_ID olarak tanımlıdır.
    ===================================================== */
 (function () {
   'use strict';
 
-  var ANAHTAR   = 'nearby_cerez_onay';   // localStorage anahtarı
+  var ANAHTAR   = 'civari_cerez_onay';   // localStorage anahtarı
   var GECERLILIK = 180 * 24 * 60 * 60 * 1000; // 6 ay (ms)
 
   /* ---------- Onay durumunu oku ---------- */
@@ -48,7 +48,7 @@
 
   function etiketiYukle() {
     if (gaYuklendi) return;
-    var id = window.NEARBY_GA_ID;
+    var id = window.CİVARİ_GA_ID;
     if (!id) return;
     gaYuklendi = true;
 
@@ -100,9 +100,9 @@
 
   /* ---------- Banner ---------- */
   function stilEkle() {
-    if (document.getElementById('nearbyCerezStil')) return;
+    if (document.getElementById('civariCerezStil')) return;
     var st = document.createElement('style');
-    st.id = 'nearbyCerezStil';
+    st.id = 'civariCerezStil';
     st.textContent = [
       '.cz-banner{position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#fff;',
       'border-top:1px solid #d2d2d1;box-shadow:0 -12px 40px -18px rgba(0,0,0,.3);',

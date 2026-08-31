@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Yorum API (yaş kontrolü + fotoğraf + silme)
+ * CİVARİ — Yorum API (yaş kontrolü + fotoğraf + silme)
  * GET  ?venue_id=5        -> yorumlar + ortalama
  * POST action=add ...     -> yorum ekle (GİRİŞ + 18 yaş gerekli; foto Lv2+)
  * POST action=delete id=. -> kendi yorumunu sil

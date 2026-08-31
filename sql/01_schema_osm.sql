@@ -1,6 +1,6 @@
 -- =====================================================
---  NEARBY — OSM için ŞEMA GÜNCELLEMESİ  (1. adım)
---  phpMyAdmin > nearby_db > SQL > yapıştır > Git
+--  CİVARİ — OSM için ŞEMA GÜNCELLEMESİ  (1. adım)
+--  phpMyAdmin > civari_db > SQL > yapıştır > Git
 --  Güvenle birden çok kez çalıştırılabilir (IF NOT EXISTS).
 --  Mevcut veriye DOKUNMAZ, sadece yeni sütun/index ekler.
 -- =====================================================

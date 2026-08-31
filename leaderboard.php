@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — En İyi Kâşifler (Liderlik)
+ * CİVARİ — En İyi Kâşifler (Liderlik)
  * GET ?scope=district|province|country  (varsayılan country)
  * district/province => oturum açan kullanıcının kendi ilçe/iline göre filtreler.
  * Puan = yorum*10 + check-in*2

@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Mekan Listeleme + Yapay Zeka Destekli Doğal Dil Araması
+ * CİVARİ — Mekan Listeleme + Yapay Zeka Destekli Doğal Dil Araması
  * ?q=...  &  ?category=...
  * "öğrenciyim ucuz kafe", "alkolsüz lüks mekan eşimle" gibi cümleleri
  * otomatik olarak kategori / fiyat / alkol / etiket filtrelerine çevirir.

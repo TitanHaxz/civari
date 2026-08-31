@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Profil API
+ * CİVARİ — Profil API
  * GET  (oturum açıksa)      -> kullanıcı bilgisi + yorum sayısı + yorumlarım + favorilerim
  * POST action=update_contact phone=... -> iletişim güncelle
  */

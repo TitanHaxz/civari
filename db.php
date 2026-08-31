@@ -1,12 +1,12 @@
 <?php
 /*
- * NEARBY — Merkezi Veritabanı Bağlantısı (Dayanıklı sürüm)
+ * CİVARİ — Merkezi Veritabanı Bağlantısı (Dayanıklı sürüm)
  * Hem 127.0.0.1 hem localhost dener; hangisi tutarsa onu kullanır.
  * Bağlantı kurulamazsa $pdo = null olur, betiği ÇÖKERTMEZ.
  */
 
-$DB_NAME = 'nearby_db';
-$DB_USER = 'nearby_user';
+$DB_NAME = 'civari_db';
+$DB_USER = 'civari_user';
 $DB_PASS = 'CHANGE_ME';   // Plesk'teki şifreyle BİREBİR aynı olmalı
 $DB_PORT = '3306';
 
@@ -37,5 +37,5 @@ foreach ($DB_HOSTS as $host) {
 }
 
 if ($pdo === null) {
-    error_log('Nearby DB Hatası: ' . $db_error);
+    error_log('Civari DB Hatası: ' . $db_error);
 }

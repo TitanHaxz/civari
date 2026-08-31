@@ -1,11 +1,11 @@
 <?php
 /*
- * NEARBY — OSM / Overpass İçe Aktarma Paneli  (3. adım)
+ * CİVARİ — OSM / Overpass İçe Aktarma Paneli  (3. adım)
  * ------------------------------------------------------
  * Kullanım (tarayıcıda):
  *   1) Önce sql/01_schema_osm.sql çalıştırılmış olmalı.
  *   2) osm_config.php içindeki $OSM_IMPORT_TOKEN'ı değiştir.
- *   3) https://nearby.com.tr/import_osm.php?token=SENIN_TOKENIN
+ *   3) https://civari.com.tr/import_osm.php?token=SENIN_TOKENIN
  *      -> "Başlat" de. Panel şehirleri kutu kutu otomatik gezer.
  *
  * Her istek TEK bir coğrafi kutucuğu işler; böylece hosting zaman aşımına
@@ -92,7 +92,7 @@ function osm_fetch(string $query, array $endpoints, int $timeout): array {
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_TIMEOUT        => $timeout + 40,
                 CURLOPT_CONNECTTIMEOUT => 25,
-                CURLOPT_USERAGENT      => 'NearbyOSMImporter/1.0 (+https://nearby.com.tr)',
+                CURLOPT_USERAGENT      => 'CivariOSMImporter/1.0 (+https://civari.com.tr)',
                 CURLOPT_HTTPHEADER     => ['Content-Type: application/x-www-form-urlencoded'],
             ]);
             $body = curl_exec($ch);
@@ -109,7 +109,7 @@ function osm_fetch(string $query, array $endpoints, int $timeout): array {
         } else {
             $ctx = stream_context_create(['http' => [
                 'method'  => 'POST',
-                'header'  => "Content-Type: application/x-www-form-urlencoded\r\nUser-Agent: NearbyOSMImporter/1.0\r\n",
+                'header'  => "Content-Type: application/x-www-form-urlencoded\r\nUser-Agent: CivariOSMImporter/1.0\r\n",
                 'content' => http_build_query(['data' => $query]),
                 'timeout' => $timeout + 40,
             ]]);
@@ -233,7 +233,7 @@ if ($action === 'count') {
 ?><!doctype html>
 <html lang="tr"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nearby — OSM İçe Aktarma</title>
+<title>Civari — OSM İçe Aktarma</title>
 <?php if ($action === 'run' && !$noauto) {
     $next = (int)($_GET['i'] ?? 0) + 1;
     if ($next < $TOTAL) echo '<meta http-equiv="refresh" content="3;url=?' . $tokenQS . '&action=run&i=' . $next . '">';
@@ -259,7 +259,7 @@ if ($action === 'count') {
   .warn{background:#fff6e8;border:1px solid #ffd591;color:#8a5a00;padding:10px 14px;border-radius:10px;font-size:13px}
   .ok{color:#137333}.err{color:#c5221f}
 </style></head><body><div class="wrap">
-<h1>🧭 Nearby — OpenStreetMap İçe Aktarma</h1>
+<h1>🧭 Civari — OpenStreetMap İçe Aktarma</h1>
 <div class="sub">Kaynak: Overpass API · Lisans: ODbL · <?= $TOTAL ?> kutucuk · <?= count($OSM_CITIES) ?> şehir</div>
 
 <?php

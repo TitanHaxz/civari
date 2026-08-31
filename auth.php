@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Kimlik Doğrulama API (Kurşun geçirmez sürüm)
+ * CİVARİ — Kimlik Doğrulama API (Kurşun geçirmez sürüm)
  * Her durumda TEMİZ JSON döndürür. Doğrudan tarayıcıdan açılırsa da JSON verir (test için).
  */
 ini_set('display_errors', '0');
@@ -41,7 +41,7 @@ function jsonOut(array $data): void {
 
 /* Basit IP bazlı hız sınırlama (API Gateway yerine hafif çözüm) */
 function rateLimit(string $key, int $max, int $windowSec): bool {
-    $dir = sys_get_temp_dir() . '/nearby_rl';
+    $dir = sys_get_temp_dir() . '/civari_rl';
     if (!is_dir($dir)) @mkdir($dir, 0775, true);
     $file = $dir . '/' . md5($key) . '.json';
     $now = time();

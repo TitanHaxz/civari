@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Favori API
+ * CİVARİ — Favori API
  * GET  (oturum açıksa) -> kullanıcının favori mekan id listesi
  * POST action=toggle venue_id -> favoriye ekle/çıkar
  */

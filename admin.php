@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — Yönetim Paneli (Dashboard + Mekan + Kullanıcı + Yorum Yönetimi)
+ * CİVARİ — Yönetim Paneli (Dashboard + Mekan + Kullanıcı + Yorum Yönetimi)
  * ŞİFREYİ DEĞİŞTİRİN: $ADMIN_PASSWORD
  */
 session_start();
@@ -37,7 +37,7 @@ if (isset($_POST['admin_login'])) {
 if (empty($_SESSION['admin_ok'])):
 ?>
 <!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin Giriş — Nearby</title>
+<title>Admin Giriş — Civari</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
 <style>
  *{margin:0;box-sizing:border-box;font-family:'Outfit',sans-serif}
@@ -49,7 +49,7 @@ if (empty($_SESSION['admin_ok'])):
  button{width:100%;padding:14px;border:none;border-radius:12px;background:#ff9900;color:#fff;font-weight:800;cursor:pointer;font-size:1rem}
  button:hover{background:#e07f00}.err{background:#ef4444;padding:10px;border-radius:8px;text-align:center;margin-bottom:14px;font-size:.9rem}
 </style></head><body>
- <form method="POST"><h1>Nearby<span>.</span></h1><p>Yönetim Paneli</p>
+ <form method="POST"><h1>Civari<span>.</span></h1><p>Yönetim Paneli</p>
    <?php if(!empty($login_error)): ?><div class="err"><?= e($login_error) ?></div><?php endif; ?>
    <input type="password" name="admin_pass" placeholder="Yönetici Şifresi" required autofocus>
    <button name="admin_login">Giriş Yap</button>
@@ -301,7 +301,7 @@ try { $yayindaMekan = $pdo->query("SELECT COUNT(*) FROM venues WHERE onay_durumu
 <!DOCTYPE html><html lang="tr"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Yönetim Paneli — Nearby</title>
+<title>Yönetim Paneli — Civari</title>
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -310,7 +310,7 @@ try { $yayindaMekan = $pdo->query("SELECT COUNT(*) FROM venues WHERE onay_durumu
 
 <header class="bg-black border-b border-white/10 sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <div class="brand text-2xl font-extrabold text-orange-500">Nearby<span class="text-white">.</span> <span class="text-sm font-sans text-gray-400 ml-2">Yönetim</span></div>
+    <div class="brand text-2xl font-extrabold text-orange-500">Civari<span class="text-white">.</span> <span class="text-sm font-sans text-gray-400 ml-2">Yönetim</span></div>
     <div class="flex items-center gap-3">
       <a href="index.html" target="_blank" class="text-sm text-gray-300 hover:text-white">Siteyi Gör ↗</a>
       <a href="?logout=1" class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">Çıkış</a>

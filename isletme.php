@@ -1,6 +1,6 @@
 <?php
 /*
- * NEARBY — İŞLETME PANELİ (tam sayfa)
+ * CİVARİ — İŞLETME PANELİ (tam sayfa)
  * -----------------------------------
  * İşletme sahibi kendi mekanını buradan yönetir: bilgiler, harita üzerinde konum,
  * çalışma saatleri, fotoğraf galerisi ve onaya gönderme.
@@ -56,7 +56,7 @@ $GUNLER = ['Mo'=>'Pazartesi','Tu'=>'Salı','We'=>'Çarşamba','Th'=>'Perşembe',
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>İşletme Paneli — <?= e($isletmeAdi) ?> | Nearby</title>
+<title>İşletme Paneli — <?= e($isletmeAdi) ?> | Civari</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#ff9900">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -211,7 +211,7 @@ $GUNLER = ['Mo'=>'Pazartesi','Tu'=>'Salı','We'=>'Çarşamba','Th'=>'Perşembe',
 
 <header class="ust">
   <div class="ic">
-    <a class="logo" href="index.html">Nearby<span>.</span></a>
+    <a class="logo" href="index.html">Civari<span>.</span></a>
     <div class="ust-sag">
       <a class="ust-btn" href="index.html">Siteyi Gör</a>
       <button class="ust-btn" onclick="cikisYap()">Çıkış</button>
@@ -230,7 +230,7 @@ $GUNLER = ['Mo'=>'Pazartesi','Tu'=>'Salı','We'=>'Çarşamba','Th'=>'Perşembe',
   <?php if ($durum === 'onaylandi'): ?>
     <div class="durum onay" role="status">
       <div class="durum-ust"><span class="durum-rozet">Yayında</span></div>
-      <h2>Mekanın Nearby'de yayında 🎉</h2>
+      <h2>Mekanın Civari'de yayında 🎉</h2>
       <p>Ziyaretçiler mekanını keşfet sayfasında, haritada ve aramalarda görebiliyor. Bilgilerini güncellersen değişiklikler kısa bir incelemeden sonra yayınlanır.</p>
       <a class="link" href="mekan.php?id=<?= (int)$mekan['id'] ?>" target="_blank" rel="noopener">Mekan sayfanı gör ↗</a>
     </div>

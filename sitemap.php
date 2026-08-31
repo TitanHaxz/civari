@@ -1,18 +1,18 @@
 <?php
 /*
- * NEARBY — SİTE HARİTASI (Google'a "bende şu sayfalar var" listesi)
+ * CİVARİ — SİTE HARİTASI (Google'a "bende şu sayfalar var" listesi)
  * ------------------------------------------------------------------
  * Dinamiktir: veritabanına yeni mekan eklediğinde site haritası kendiliğinden
  * güncellenir, elle dosya düzenlemeye gerek kalmaz.
  *
- * Google Search Console'a şu adresi gönder:  https://nearby.com.tr/sitemap.php
+ * Google Search Console'a şu adresi gönder:  https://civari.com.tr/sitemap.php
  */
 ini_set('display_errors', '0');
 require __DIR__ . '/db.php';
 
 header('Content-Type: application/xml; charset=utf-8');
 
-$SITE = 'https://nearby.com.tr';
+$SITE = 'https://civari.com.tr';
 $bugun = date('Y-m-d');
 
 /* Sabit sayfalar */

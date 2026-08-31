@@ -1,5 +1,5 @@
-/* NEARBY Service Worker — ağ öncelikli (online'da her zaman güncel, offline'da yedek) */
-const CACHE = 'nearby-v23';
+/* CİVARİ Service Worker — ağ öncelikli (online'da her zaman güncel, offline'da yedek) */
+const CACHE = 'civari-v23';
 
 self.addEventListener('install', e => {
   self.skipWaiting();

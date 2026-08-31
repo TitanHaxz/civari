@@ -1,6 +1,6 @@
 -- =====================================================
---  NEARBY — MEKAN FOTOĞRAF GALERİSİ  (5. adım)
---  phpMyAdmin > nearby_db > SQL sekmesi > yapıştır > Git
+--  CİVARİ — MEKAN FOTOĞRAF GALERİSİ  (5. adım)
+--  phpMyAdmin > civari_db > SQL sekmesi > yapıştır > Git
 -- =====================================================
 --
 --  Bu script yeni bir tablo oluşturur. Mevcut veriye DOKUNMAZ,
