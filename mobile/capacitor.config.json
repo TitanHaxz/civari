@@ -1,0 +1,28 @@
+{
+  "appId": "com.nearby.app",
+  "appName": "Nearby",
+  "webDir": "www",
+  "server": {
+    "url": "https://nearby.com.tr",
+    "cleartext": false,
+    "androidScheme": "https",
+    "iosScheme": "https"
+  },
+  "backgroundColor": "#ffffff",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1400,
+      "launchAutoHide": true,
+      "backgroundColor": "#ffffff",
+      "showSpinner": false,
+      "androidSpinnerStyle": "small",
+      "splashFullScreen": true,
+      "splashImmersive": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#ffffff"
+    },
+    "Geolocation": {}
+  }
+}

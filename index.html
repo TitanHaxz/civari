@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nearby — Ankara'nın Merkezinde Mekan Keşfi | Kızılay & Tunalı</title>
+    <meta name="description" content="Nearby, Ankara'nın merkezindeki (Kızılay, Tunalı Hilmi, Kavaklıdere) özenle seçilmiş gerçek kafe, restoran, tatlıcı ve barları harita üzerinde keşfetmeni sağlar.">
+    <meta name="keywords" content="Nearby, Ankara, Kızılay, Tunalı Hilmi, Kavaklıdere, mekan keşif, kafe, restoran, bar, tatlıcı, harita, yerel rehber">
+    <link rel="canonical" href="https://nearby.com.tr/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Nearby">
+    <meta property="og:title" content="Nearby — Ankara'nın Merkezinde Mekan Keşfi">
+    <meta property="og:description" content="Kızılay–Tunalı hattından özenle seçilmiş gerçek mekanlar: kafe, restoran, tatlıcı, bar. Harita üzerinde keşfet.">
+    <meta property="og:url" content="https://nearby.com.tr/">
+    <meta property="og:image" content="https://nearby.com.tr/icon-512.png">
+    <meta name="twitter:card" content="summary">
+
+    <!-- ÖLÇÜM (GA4) — Ziyaretçi sayısı buradan takip edilir.
+         Ölçüm kodu KVKK gereği yalnızca kullanıcı çerez onayı verdiğinde yüklenir;
+         bu işi cerez.js yürütür. Kimliği boşaltırsan hiçbir izleme kodu çalışmaz. -->
+    <!-- GA4 akış kimliği (yalnızca kayıt için; web kodu ölçüm kimliğini kullanır): 15436140513 -->
+    <script>window.NEARBY_GA_ID = 'G-4MY8MMLRQX';</script>
+    <script src="cerez.js?v=23" defer></script>
+
+    <meta name="theme-color" content="#ff9900">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Nearby">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,mail@example.com,400..800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/mail@example.com/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/mail@example.com/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/mail@example.com/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="style.css?v=23">
+
+    <script src="https://unpkg.com/mail@example.com/dist/leaflet.js" defer></script>
+    <script src="https://unpkg.com/mail@example.com/dist/leaflet.markercluster.js" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/mail@example.com/dist/confetti.browser.min.js" defer></script>
+    <script src="script.js?v=23" defer></script>
+</head>
+<body>
+
+    <!-- INTRO (Nearby Pin) -->
+    <div id="intro">
+        <div class="intro-aurora"></div>
+        <div class="intro-content">
+            <div class="intro-pin">
+                <span class="pin-pulse"></span>
+                <span class="pin-pulse p2"></span>
+                <span class="pin-pulse p3"></span>
+                <span class="pin-mark"></span>
+            </div>
+            <h1 class="intro-logo">Nearby<span>.</span></h1>
+            <p class="intro-tagline">Çevrende ne var, keşfet</p>
+            <button class="btn-discover" id="enterBtn">Keşfetmeye Başla <i data-lucide="arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <div class="logo" onclick="scrollTop()">Nearby<span>.</span></div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" id="btn-grid" onclick="switchView('grid')"><i data-lucide="layout-grid"></i> Keşfet</button>
+                <button class="nav-btn" id="btn-map" onclick="switchView('map')"><i data-lucide="map-pinned"></i> Harita</button>
+            </nav>
+            <div class="header-right">
+                <button class="auth-trigger" id="btnAuth" onclick="openAuthModal()">Giriş Yap</button>
+                <div id="userWelcome" class="user-welcome">
+                    <a class="panel-link" id="panelLink" href="isletme.php" style="display:none"><i data-lucide="store"></i> İşletme Panelim</a>
+                    <button class="welcome-main" onclick="openProfile()">
+                        <i data-lucide="user-check"></i>
+                        <span id="userNameText"></span>
+                    </button>
+                    <button class="btn-logout" onclick="cikisYap()">Çıkış</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- KEŞFET -->
+    <main id="view-grid">
+        <div id="searchOverlay" class="search-overlay"></div>
+        <section class="hero">
+            <div class="hero-bg"><div class="hero-radar"></div><div class="hero-glow"></div></div>
+            <div class="hero-content">
+                <h2 class="hero-title">Yakınındaki her şey <span>tek dokunuşta.</span></h2>
+                <div class="search-bar">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Akıllı arama: 'öğrenciyim, ucuz kafe' yazabilirsin...">
+                    <button class="loc-btn" id="locBtn" onclick="findNearMe()" title="Yakınımdakileri göster" aria-label="Yakınımdaki mekanları göster"><i data-lucide="locate-fixed"></i></button>
+                    <div class="combo">
+                        <button class="combo-trigger" id="comboTrigger" onclick="toggleCombo(event)">
+                            <span id="comboLabel">Tüm Kategoriler</span><i data-lucide="chevron-down"></i>
+                        </button>
+                        <div class="combo-menu" id="comboMenu"></div>
+                    </div>
+                </div>
+                <div class="mood-bar" id="moodBar"></div>
+                <div class="ai-hint"><i data-lucide="wand-2"></i> Yapay zeka destekli arama — "alkolsüz lüks mekan", "sessiz çalışma yeri" gibi cümleler de çalışır</div>
+            </div>
+        </section>
+
+        <!-- VİTRİN — Ankara'da Öne Çıkanlar (5 gerçek mekan; script.js/renderVitrin doldurur) -->
+        <section class="container" id="vitrinWrap">
+            <div class="grid-header">
+                <h3>Ankara'da Öne Çıkanlar</h3>
+                <span class="grid-count">Yerinde doğrulanmış gerçek mekanlar</span>
+            </div>
+            <div class="vitrin-row" id="vitrin"></div>
+        </section>
+
+        <section class="container">
+            <div id="gatedContent">
+                <div class="chips" id="chips"></div>
+
+                <div class="toolbar">
+                    <div class="toolbar-left"></div>
+                    <div class="toolbar-right">
+                        <!-- Oyunlaştırma (liderlik + keşif sayacı) vitrin döneminde gizlendi; kod duruyor -->
+                        <div class="sort-wrap">
+                            <i data-lucide="arrow-up-down"></i>
+                            <select id="sortSelect" onchange="setSort(this.value)" aria-label="Sıralama">
+                                <option value="recommended">Önerilen</option>
+                                <option value="rating">En Yüksek Puan</option>
+                                <option value="reviews">En Çok Yorum</option>
+                                <option value="distance">En Yakın</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-header">
+                    <h3 id="gridTitle">Yakınlarda Popüler</h3>
+                    <span class="grid-count" id="gridCount"></span>
+                </div>
+                <div class="venue-grid" id="venueGrid"></div>
+                <div id="scrollSentinel" style="height:1px"></div>
+                <div id="gridLoader" class="grid-loader hidden"><span class="spinner"></span> Yükleniyor...</div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">Nearby<span>.</span></div>
+                    <p>Ankara'nın merkezindeki en iyi kafe, restoran, tatlıcı ve barları keşfetmenin en akıllı yolu.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Keşfet</h4>
+                    <a onclick="quickCat('Restoran')">Restoranlar</a>
+                    <a onclick="quickCat('Kafe')">Kafeler</a>
+                    <a onclick="quickCat('Tatlıcı')">Tatlıcılar</a>
+                    <a onclick="quickCat('Bar')">Barlar</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Kurumsal</h4>
+                    <a href="hakkimizda.html">Hakkımızda</a>
+                    <a href="mailto:mail@example.com?subject=İşletme%20Kaydı">İşletme Ekle</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Yasal</h4>
+                    <a href="gizlilik.html">Gizlilik Politikası</a>
+                    <a href="kvkk.html">KVKK Aydınlatma Metni</a>
+                    <a href="cerez-politikasi.html">Çerez Politikası</a>
+                    <a href="kullanim-kosullari.html">Kullanım Koşulları</a>
+                    <a onclick="if(window.cerezAyarlari) cerezAyarlari()" style="cursor:pointer">Çerez Ayarları</a>
+                </div>
+                <div class="footer-col">
+                    <h4>İletişim</h4>
+                    <a href="mailto:mail@example.com">mail@example.com</a>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 Nearby. Tüm hakları saklıdır.</div>
+        </footer>
+    </main>
+
+    <!-- HARİTA (Split-Canvas: solda liste / sağda harita · mobilde bottom sheet) -->
+    <div id="view-map" class="hidden">
+        <div class="map-split">
+            <aside class="map-list" id="mapList">
+                <div class="map-list-handle" id="mapListHandle"></div>
+                <div class="map-list-head">
+                    <span id="mapListTitle">Bu bölgedeki mekanlar</span>
+                    <span class="map-list-count" id="mapListCount"></span>
+                </div>
+                <div class="map-list-scroll" id="mapListScroll"></div>
+            </aside>
+            <div class="map-canvas-wrap">
+                <div id="leaflet-map"></div>
+                <button id="areaSearchBtn" onclick="searchThisArea()"><i data-lucide="refresh-cw"></i> Bu alanda ara</button>
+                <button id="myLocBtn" onclick="goToMyLocation()" title="Konumuma dön" aria-label="Konumuma dön"><i data-lucide="locate-fixed"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBİL ALT NAVİGASYON (her görünümde erişilebilir) -->
+    <nav class="mobile-nav" id="mobileNav">
+        <button class="mnav-btn active" data-nav="kesfet" onclick="mobileNav('kesfet')"><i data-lucide="compass"></i><span>Keşfet</span></button>
+        <button class="mnav-btn" data-nav="harita" onclick="mobileNav('harita')"><i data-lucide="map"></i><span>Harita</span></button>
+        <button class="mnav-btn" data-nav="favoriler" onclick="mobileNav('favoriler')"><i data-lucide="heart"></i><span>Favoriler</span></button>
+        <button class="mnav-btn" data-nav="profil" onclick="mobileNav('profil')"><i data-lucide="user"></i><span>Profil</span></button>
+    </nav>
+
+    <!-- (Mekan Ekle / Bildir akışı kaldırıldı — yerini İşletme Hesabı sistemi aldı) -->
+
+    <!-- GİRİŞ / KAYIT -->
+    <div class="modal-overlay" id="leaderboardModal">
+        <div class="lb-modal-card">
+            <button class="btn-close" aria-label="Kapat" onclick="closeModal('leaderboardModal')"><i data-lucide="x"></i></button>
+            <div class="lb-modal-head">
+                <span class="lb-modal-title"><i data-lucide="trophy"></i> En İyi Kâşifler</span>
+                <span class="lb-scope-label" id="lbScopeLabel">Türkiye</span>
+            </div>
+            <div class="lb-tabs" id="lbTabs">
+                <button class="lb-scope-btn" data-scope="district" onclick="switchLbScope('district')">İlçem</button>
+                <button class="lb-scope-btn" data-scope="province" onclick="switchLbScope('province')">İlim</button>
+                <button class="lb-scope-btn active" data-scope="country" onclick="switchLbScope('country')">Türkiye</button>
+            </div>
+            <div class="lb-list" id="lbModalList"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="auth-container" id="authContainer">
+            <button class="btn-close" aria-label="Kapat" onclick="closeModal('authModal')"><i data-lucide="x"></i></button>
+            <div class="auth-form sign-up">
+                <h2>Aramıza Katıl</h2><p class="auth-sub">Saniyeler içinde hesabını oluştur.</p>
+
+                <!-- HESAP TÜRÜ: Bireysel / İşletme -->
+                <div class="hesap-turu" role="radiogroup" aria-label="Hesap türü">
+                    <button type="button" class="ht-btn active" id="htBireysel" role="radio" aria-checked="true" onclick="hesapTuruSec('bireysel')">
+                        <i data-lucide="user"></i>
+                        <span class="ht-ad">Bireysel</span>
+                        <span class="ht-alt">Keşfet, yorum yap</span>
+                    </button>
+                    <button type="button" class="ht-btn" id="htIsletme" role="radio" aria-checked="false" onclick="hesapTuruSec('isletme')">
+                        <i data-lucide="store"></i>
+                        <span class="ht-ad">İşletme</span>
+                        <span class="ht-alt">Mekanını yönet</span>
+                    </button>
+                </div>
+                <div class="social-auth">
+                    <button type="button" class="social-btn" onclick="socialLogin('google')"><svg viewBox="0 0 48 48" width="18" height="18"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Google ile devam et</button>
+                    <button type="button" class="social-btn apple" onclick="socialLogin('apple')"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M16.36 12.9c.02 2.53 2.22 3.37 2.24 3.38-.02.06-.35 1.2-1.16 2.37-.7 1.02-1.43 2.03-2.58 2.05-1.13.02-1.5-.67-2.79-.67-1.29 0-1.7.65-2.77.69-1.11.04-1.96-1.1-2.67-2.12-1.45-2.1-2.56-5.93-1.07-8.52.74-1.29 2.06-2.1 3.49-2.12 1.09-.02 2.12.73 2.79.73.67 0 1.92-.9 3.24-.77.55.02 2.1.22 3.1 1.68-.08.05-1.85 1.08-1.83 3.23zM14.2 5.36c.59-.72 1-1.72.89-2.72-.86.03-1.9.57-2.51 1.29-.55.63-1.03 1.65-.9 2.62.96.07 1.93-.49 2.52-1.19z"/></svg> Apple ile devam et</button>
+                </div>
+                <div class="auth-divider"><span>veya e-posta ile</span></div>
+                <form id="registerForm" onsubmit="handleRegister(event)">
+                    <!-- Yalnızca işletme hesabında görünür -->
+                    <div class="input-wrap isletme-alan" id="wrapIsletmeAdi" style="display:none">
+                        <i data-lucide="store"></i><input type="text" id="regIsletmeAdi" placeholder="İşletme adı (örn. Dharma Coffee)">
+                    </div>
+                    <div class="input-wrap"><i data-lucide="user"></i><input type="text" id="regName" placeholder="Ad Soyad" required></div>
+                    <div class="input-wrap isletme-alan" id="wrapUnvan" style="display:none">
+                        <i data-lucide="briefcase"></i><input type="text" id="regUnvan" placeholder="Görevin (örn. İşletme sahibi, Müdür)">
+                    </div>
+                    <div class="input-wrap"><i data-lucide="mail"></i><input type="email" id="regEmail" placeholder="E-posta" required></div>
+                    <div class="input-wrap"><i data-lucide="lock"></i><input type="password" id="regPass" placeholder="Şifre (en az 8 karakter)" minlength="8" required></div>
+                    <div class="input-wrap bireysel-alan" id="wrapDogumYili"><i data-lucide="cake"></i><input type="number" id="regBirthYear" placeholder="Doğum Yılı (örn. 2000)" min="1900" max="2026" required></div>
+                    <div class="input-row">
+                        <div class="input-wrap"><i data-lucide="map"></i>
+                            <select id="regProvince" onchange="onProvinceChange()" required>
+                                <option value="">İl seç</option>
+                            </select>
+                        </div>
+                        <div class="input-wrap"><i data-lucide="map-pin"></i>
+                            <select id="regDistrict" required>
+                                <option value="">İlçe seç</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="isletme-not isletme-alan" id="isletmeNot" style="display:none">
+                        <i data-lucide="info"></i>
+                        Kaydolduktan sonra mekan bilgilerini gireceğin <b>İşletme Paneli</b> açılacak. Başvurun ekibimizce incelendikten sonra mekanın sitede yayınlanır.
+                    </p>
+                    <label class="onay-satiri">
+                        <input type="checkbox" id="regOnay" required>
+                        <span><a href="kullanim-kosullari.html" target="_blank">Kullanım Koşulları</a>'nı ve <a href="gizlilik.html" target="_blank">Gizlilik Politikası</a>'nı okudum, kabul ediyorum. <a href="kvkk.html" target="_blank">KVKK Aydınlatma Metni</a> kapsamında kişisel verilerimin işlenmesine onay veriyorum.</span>
+                    </label>
+                    <button type="submit" class="btn-primary" id="regBtn">Kayıt Ol</button>
+                </form>
+                <p class="auth-switch">Zaten üye misin? <a onclick="toggleAuth(false)">Giriş yap</a></p>
+            </div>
+            <div class="auth-form sign-in">
+                <h2>Tekrar Hoşgeldin</h2><p class="auth-sub">Hesabına giriş yap ve keşfe devam et.</p>
+                <div class="social-auth">
+                    <button type="button" class="social-btn" onclick="socialLogin('google')"><svg viewBox="0 0 48 48" width="18" height="18"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg> Google ile devam et</button>
+                    <button type="button" class="social-btn apple" onclick="socialLogin('apple')"><svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M16.36 12.9c.02 2.53 2.22 3.37 2.24 3.38-.02.06-.35 1.2-1.16 2.37-.7 1.02-1.43 2.03-2.58 2.05-1.13.02-1.5-.67-2.79-.67-1.29 0-1.7.65-2.77.69-1.11.04-1.96-1.1-2.67-2.12-1.45-2.1-2.56-5.93-1.07-8.52.74-1.29 2.06-2.1 3.49-2.12 1.09-.02 2.12.73 2.79.73.67 0 1.92-.9 3.24-.77.55.02 2.1.22 3.1 1.68-.08.05-1.85 1.08-1.83 3.23zM14.2 5.36c.59-.72 1-1.72.89-2.72-.86.03-1.9.57-2.51 1.29-.55.63-1.03 1.65-.9 2.62.96.07 1.93-.49 2.52-1.19z"/></svg> Apple ile devam et</button>
+                </div>
+                <div class="auth-divider"><span>veya e-posta ile</span></div>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="input-wrap"><i data-lucide="mail"></i><input type="email" id="logEmail" placeholder="E-posta" required></div>
+                    <div class="input-wrap"><i data-lucide="lock"></i><input type="password" id="logPass" placeholder="Şifre" required></div>
+                    <button type="submit" class="btn-primary" id="logBtn">Giriş Yap</button>
+                </form>
+                <p class="auth-switch">Hesabın yok mu? <a onclick="toggleAuth(true)">Kayıt ol</a></p>
+            </div>
+            <div class="overlay-container">
+                <div class="auth-overlay">
+                    <div class="overlay-panel overlay-left"><h2>Zaten üye misin?</h2><p>Hesabınla giriş yaparak devam et.</p><button class="btn-ghost" onclick="toggleAuth(false)">Giriş Yap</button></div>
+                    <div class="overlay-panel overlay-right"><h2>Henüz üye değil misin?</h2><p>Nearby ailesine katıl, keşfe başla.</p><button class="btn-ghost" onclick="toggleAuth(true)">Kayıt Ol</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DETAY + YORUM -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="detail-card">
+            <button class="btn-close" aria-label="Kapat" onclick="closeModal('detailModal')"><i data-lucide="x"></i></button>
+            <button class="fav-btn detail-fav" id="detailFav" onclick="toggleFav(currentVenueId, event)"><i data-lucide="heart"></i></button>
+            <div class="detail-img" id="detailImg"></div>
+            <div class="detail-body">
+                <div class="detail-top">
+                    <span class="detail-cat" id="detailCat"></span>
+                    <span class="detail-price" id="detailPrice"></span>
+                </div>
+                <h2 id="detailName"></h2>
+                <div class="detail-meta">
+                    <span class="detail-rating" id="detailRating"></span>
+                    <span class="detail-loc" id="detailLoc"></span>
+                </div>
+                <p class="detail-desc" id="detailDesc"></p>
+
+                <div class="detail-actions">
+                    <button class="act-btn primary" id="detailMapBtn"><i data-lucide="navigation"></i> Haritada</button>
+                    <button class="act-btn" id="detailDirBtn"><i data-lucide="route"></i> Yol Tarifi</button>
+                    <button class="act-btn" id="detailCallBtn"><i data-lucide="phone"></i> Ara</button>
+                    <button class="act-btn" id="detailShareBtn"><i data-lucide="share-2"></i> Paylaş</button>
+                    <a class="act-btn" id="detailPageBtn" href="#"><i data-lucide="external-link"></i> Mekan Sayfası</a>
+                </div>
+                <!-- Check-in butonu vitrin döneminde gizlendi; kod (doCheckin) duruyor -->
+
+                <div class="reviews">
+                    <h3 class="reviews-title">Yorumlar <span id="reviewCount" class="review-count-badge"></span></h3>
+                    <div id="reviewLocked" class="review-locked hidden">
+                        <i data-lucide="lock"></i>
+                        <p>Yorumları görmek ve yorum eklemek için giriş yapmalısın.</p>
+                        <button class="btn-ghost" onclick="closeModal('detailModal'); openAuthModal();">Giriş Yap</button>
+                    </div>
+                    <div id="reviewsArea" class="hidden">
+                        <div id="reviewAgeLock" class="review-locked hidden"><i data-lucide="shield-alert"></i><p>18 yaşından küçük kullanıcılar yorum yapamaz.</p></div>
+                        <form id="reviewForm" class="review-form" onsubmit="submitReview(event)">
+                            <div class="star-pick" id="starPick"></div>
+                            <textarea id="reviewText" placeholder="Bu mekan hakkındaki deneyimini paylaş..." required></textarea>
+                            <div class="review-photo-row hidden" id="reviewPhotoRow">
+                                <label class="photo-pick"><i data-lucide="image-plus"></i> <span>Fotoğraf ekle</span><input type="file" id="reviewPhoto" accept="image/*" onchange="previewReviewPhoto(this)" hidden></label>
+                                <img id="reviewPhotoPreview" class="review-photo-preview hidden" alt="önizleme">
+                                <span class="photo-lock-note" id="photoLockNote">📸 Fotoğraflı yorum Seviye 2'de (5 yorum) açılır</span>
+                            </div>
+                            <button type="submit" class="btn-primary btn-sm">Yorum Gönder</button>
+                        </form>
+                        <div id="reviewsList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PROFİL -->
+    <div class="modal-overlay" id="profileModal">
+        <div class="profile-card">
+            <button class="btn-close" aria-label="Kapat" onclick="closeModal('profileModal')"><i data-lucide="x"></i></button>
+            <div class="profile-head">
+                <button class="profile-avatar-wrap" onclick="document.getElementById('avatarInput').click()" title="Profil fotoğrafı değiştir">
+                    <div class="profile-avatar" id="profileAvatar">?</div>
+                    <span class="avatar-cam"><i data-lucide="camera"></i></span>
+                </button>
+                <input type="file" id="avatarInput" accept="image/*" onchange="uploadAvatar(this)" hidden>
+                <div class="profile-id">
+                    <h2 id="profileName">—</h2>
+                    <div class="profile-title-row"><span class="badge-title" id="profileTitle">Çaylak Gezgin</span><span id="profileLevelText">Seviye 1</span></div>
+                </div>
+            </div>
+            <div class="level-progress">
+                <div class="level-progress-info"><span id="lvCurrent">Lv 1</span><span id="lvNextInfo"></span></div>
+                <div class="level-bar"><div class="level-bar-fill" id="lvFill"></div></div>
+            </div>
+            <div class="profile-tabs">
+                <!-- Seviyem + Cüzdan sekmeleri (oyunlaştırma) vitrin döneminde gizlendi; kod duruyor -->
+                <button class="ptab active" onclick="profileTab('iletisim',this)"><i data-lucide="contact"></i> İletişim</button>
+                <button class="ptab" onclick="profileTab('favoriler',this)"><i data-lucide="heart"></i> Favoriler</button>
+                <button class="ptab" onclick="profileTab('yorumlar',this)"><i data-lucide="message-square"></i> Yorumlar</button>
+            </div>
+            <div class="profile-body">
+                <div class="ptab-pane hidden" id="pane-seviye"></div>
+                <div class="ptab-pane" id="pane-iletisim"></div>
+                <div class="ptab-pane hidden" id="pane-cuzdan"></div>
+                <div class="ptab-pane hidden" id="pane-favoriler"></div>
+                <div class="ptab-pane hidden" id="pane-yorumlar"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

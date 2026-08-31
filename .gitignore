@@ -1,0 +1,25 @@
+
+vendor/
+composer.lock
+
+# ---- Gizli bilgiler / Secrets ----
+.env
+.env.*
+!.env.example
+config.local.*
+secrets.*
+
+# ---- Veri ----
+*.db
+*.sqlite*
+*.bak
+*.backup
+*.log
+uploads/
+data/auth.json
+
+# ---- Isletim sistemi ----
+Thumbs.db
+desktop.ini
+.DS_Store
+*.lnk

@@ -1,0 +1,33 @@
+# NEARBY — SUNUCU GÜVENLİK AYARLARI (Apache sunucular için)
+# ==========================================================
+# Sunucun Plesk Windows/IIS ise bu dosya değil, web.config devreye girer.
+# İkisini birden bulundurmak zararsızdır; sunucu hangisini anlıyorsa onu kullanır.
+
+# 1) HTTP -> HTTPS yönlendirmesi
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+# 2) Güvenlik başlıkları
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(self), camera=(), microphone=(), payment=(), usb=(), magnetometer=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'"
+  Header unset X-Powered-By
+</IfModule>
+
+# 3) Hassas dosyalar internetten indirilemesin
+<FilesMatch "\.(sql|md|ini|log|bak|old)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^(db|osm_config)\.php$">
+  Require all denied
+</FilesMatch>
+
+# 4) Klasör listelemeyi kapat
+Options -Indexes

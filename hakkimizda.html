@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hakkımızda — Nearby</title>
+<meta name="description" content="Nearby; Ankara'nın merkezindeki özenle seçilmiş gerçek kafe, restoran, tatlıcı ve barları harita üzerinde keşfetmeni sağlayan yerel keşif platformudur.">
+<meta name="theme-color" content="#ff9900">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,mail@example.com,400..800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{ --primary:#ff9900; --primary-dark:#e07f00; --dark:#000; --ink:#0f172a; --muted:#64748b; --soft:#f3f4f6; --border:#e2e8f0;
+    --fd:'Bricolage Grotesque',sans-serif; --fb:'Outfit',sans-serif; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--fb);color:var(--ink);background:#fafafa;line-height:1.7}
+  a{color:var(--primary-dark)}
+  .topbar{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.9);backdrop-filter:blur(12px);height:66px;display:flex;align-items:center}
+  .topbar .wrap{max-width:900px;margin:0 auto;padding:0 22px;width:100%;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:var(--fd);font-weight:800;font-size:1.5rem;color:#fff;letter-spacing:-1px;text-decoration:none}
+  .logo span{color:var(--primary)}
+  .back{color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;background:rgba(255,255,255,.1);padding:9px 18px;border-radius:30px;transition:.2s}
+  .back:hover{background:var(--primary);color:#fff}
+  .hero{background:linear-gradient(135deg,#000 0%,#160b03 60%,#2a1505 100%);color:#fff;padding:70px 22px 60px;text-align:center}
+  .hero .badge{display:inline-block;letter-spacing:3px;font-size:.72rem;font-weight:700;padding:7px 16px;border:1px solid rgba(255,153,0,.4);border-radius:30px;color:var(--primary);background:rgba(255,153,0,.08);margin-bottom:20px}
+  .hero h1{font-family:var(--fd);font-size:clamp(2rem,6vw,3.2rem);font-weight:800;letter-spacing:-1.5px}
+  .hero h1 span{color:var(--primary)}
+  .hero p{max-width:600px;margin:16px auto 0;color:#cbd5e1;font-size:1.05rem}
+  .container{max-width:900px;margin:0 auto;padding:52px 22px 80px}
+  .container h2{font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--dark);margin:38px 0 14px}
+  .container h2:first-child{margin-top:0}
+  .container p{margin-bottom:14px;color:#334155}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:22px 0}
+  .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 10px 30px -18px rgba(0,0,0,.2)}
+  .card .ico{font-size:1.7rem;margin-bottom:10px}
+  .card h3{font-family:var(--fd);font-size:1.1rem;margin-bottom:6px;color:var(--dark)}
+  .card p{font-size:.92rem;color:var(--muted);margin:0}
+  .stats{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;margin:24px 0}
+  .stats div{text-align:center}
+  .stats strong{display:block;font-family:var(--fd);font-size:2rem;color:var(--primary)}
+  .stats span{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .cta{background:linear-gradient(135deg,#fff7ed,#ffedd5);border:1px solid rgba(255,153,0,.35);border-radius:20px;padding:30px;text-align:center;margin-top:36px}
+  .cta a{display:inline-block;background:var(--primary);color:#fff;text-decoration:none;font-weight:700;padding:13px 30px;border-radius:30px;margin-top:14px;transition:.2s}
+  .cta a:hover{background:var(--primary-dark)}
+  .foot{border-top:1px solid var(--border);text-align:center;padding:26px;color:var(--muted);font-size:.85rem}
+  .foot a{color:var(--muted);margin:0 10px;text-decoration:none}
+  .foot a:hover{color:var(--primary-dark)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap"><a class="logo" href="index.html">Nearby<span>.</span></a><a class="back" href="index.html">← Keşfet'e dön</a></div></div>
+
+<div class="hero">
+  <div class="badge">YEREL KEŞİF PLATFORMU</div>
+  <h1>Çevreni <span>keşfetmenin</span> en akıllı yolu</h1>
+  <p>Nearby; Ankara'nın merkezindeki (Kızılay, Tunalı Hilmi, Kavaklıdere) özenle seçilmiş kafe, restoran, tatlıcı ve barları harita üzerinde, tek dokunuşla keşfetmeni sağlar.</p>
+</div>
+
+<div class="container">
+  <h2>Biz kimiz?</h2>
+  <p>Nearby, Ankara'yı adım adım keşfedilebilir kılmak amacıyla yola çıkan bir yerel keşif platformudur. "Nereye gitsem?", "Çalışmak için sessiz bir kafe nerede?", "Tunalı'da tatlı nerede yenir?" gibi günlük sorulara hızlı ve görsel bir cevap sunarız.</p>
+  <p>Amacımız basit: az ama öz. Her yeri yüzeysel listelemek yerine, şehrin en iyi mekanlarını tek tek yerinde görüp derinlemesine tanıtıyoruz.</p>
+
+  <h2>Verilerimiz nereden geliyor?</h2>
+  <p>Vitrinimizdeki her mekan ekibimiz tarafından tek tek seçilir ve bilgileri yerinde doğrulanır: çalışma saatleri, adresler ve konumlar gerçektir, fotoğraflar mekanların kendisinde çekilir. Uydurma ya da kopya içerik kullanmayız — gördüğün her şey gerçektir.</p>
+
+  <div class="stats">
+    <div><strong>Ankara</strong><span>Tek Şehir, Derin Odak</span></div>
+    <div><strong>4</strong><span>Kategori</span></div>
+    <div><strong>%100</strong><span>Yerinde Doğrulanmış</span></div>
+    <div><strong>%100</strong><span>Ücretsiz</span></div>
+  </div>
+
+  <h2>Neler sunuyoruz?</h2>
+  <div class="cards">
+    <div class="card"><div class="ico">🔎</div><h3>Akıllı Arama</h3><p>"Öğrenciyim, ucuz kafe" gibi cümlelerle doğal dilde arama yapabilirsin.</p></div>
+    <div class="card"><div class="ico">🗺️</div><h3>Canlı Harita</h3><p>Mekanları harita üzerinde kümelenmiş pinlerle keşfet, yakınındakileri gör.</p></div>
+    <div class="card"><div class="ico">⭐</div><h3>Yorum & Favori</h3><p>Deneyimini paylaş, beğendiğin yerleri favorilerine ekle.</p></div>
+    <div class="card"><div class="ico">🧭</div><h3>Gerçek Vitrin</h3><p>Her mekan yerinde ziyaret edilir; bilgiler ve fotoğraflar birinci elden gelir.</p></div>
+  </div>
+
+  <h2>Neden sadece Ankara?</h2>
+  <p>Şu an tüm enerjimizi Ankara'nın merkezine — Kızılay, Tunalı Hilmi ve Kavaklıdere hattına — veriyoruz. Önce bir şehri hakkıyla anlatmak, sonra büyümek istiyoruz. Vitrin her hafta yeni mekanlarla zenginleşecek.</p>
+
+  <div class="cta">
+    <h3 style="font-family:var(--fd);font-size:1.3rem">İşletmen mi var?</h3>
+    <p style="color:#7c5a1e">Mekanını Nearby'de öne çıkar, müşterilerinle buluş.</p>
+    <a href="mailto:mail@example.com?subject=İşletme%20Kaydı">İletişime Geç</a>
+  </div>
+</div>
+
+<div class="foot">
+  © 2026 Nearby — Ankara'nın merkezinde mekan keşfi.<br>
+  <a href="index.html">Anasayfa</a> · <a href="gizlilik.html">Gizlilik</a> · <a href="kvkk.html">KVKK</a> ·
+  <a href="cerez-politikasi.html">Çerez Politikası</a> · <a href="kullanim-kosullari.html">Kullanım Koşulları</a> ·
+  <a href="mailto:mail@example.com">mail@example.com</a>
+</div>
+</body>
+</html>

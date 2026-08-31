@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Yönetim ve API uçları arama motorlarına kapalı
+Disallow: /admin.php
+Disallow: /import_osm.php
+Disallow: /auth.php
+Disallow: /upload.php
+Disallow: /profile.php
+Disallow: /favorites.php
+Disallow: /checkin.php
+Disallow: /leaderboard.php
+Disallow: /isletme.php
+Disallow: /isletme_api.php
+Disallow: /uploads/
+Disallow: /db.php
+Disallow: /osm_config.php
+Disallow: /*.sql$
+
+Sitemap: https://nearby.com.tr/sitemap.php
