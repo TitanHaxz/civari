@@ -501,8 +501,8 @@ if ($avg !== null && count($reviews) > 0) {
   (function(){
     var lat = <?= (float)$venue['lat'] ?>, lng = <?= (float)$venue['lng'] ?>;
     var map = L.map('map', { scrollWheelZoom:false }).setView([lat, lng], 16);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      { attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:20 }).addTo(map);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { attribution:'&copy; OpenStreetMap katkıcıları', maxZoom:19 }).addTo(map);
     L.circleMarker([lat, lng], { radius:11, color:'#fff', weight:3, fillColor:'<?= e($renk) ?>', fillOpacity:1 })
       .addTo(map).bindTooltip(<?= json_encode($ad, JSON_UNESCAPED_UNICODE) ?>, { direction:'top', offset:[0,-12] });
   })();

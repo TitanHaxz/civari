@@ -464,8 +464,8 @@ let harita, pin;
   const merkez = varMi ? [lat, lng] : ANKARA;
 
   harita = L.map('harita', { scrollWheelZoom:false }).setView(merkez, varMi ? 17 : 13);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    { attribution:'&copy; OpenStreetMap &copy; CARTO', maxZoom:20 }).addTo(harita);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    { attribution:'&copy; OpenStreetMap katkıcıları', maxZoom:19 }).addTo(harita);
 
   const ikon = L.divIcon({
     html:'<div style="width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#ff9900;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35)"></div>',
